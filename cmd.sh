@@ -16,7 +16,9 @@ then
     --expires "$expires" \
     --name "$name" \
     --vault-name "$vaultName" \
-    --value "$value"
+    --value "$value" \
+    >/dev/null
+  echo "secret set"
 else
   echo "creating key vault secret"
   az keyvault secret set \
@@ -25,5 +27,7 @@ else
     --expires "$expires" \
     --name "$name" \
     --vault-name "$vaultName" \
-    --value "$value"
+    --value "$value" \
+    >/dev/null
+  echo "secret created"
 fi
