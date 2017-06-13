@@ -1,0 +1,58 @@
+name: github.com/opspec-pkgs/azure.keyvault.secret.set
+description: creates an azure keyvault secret or sets existing secret with new value
+inputs:
+  subscriptionId:
+    string:
+      constraints: { minLength: 1 }
+      description: id of azure subscription
+  azureUsername:
+    string:
+      constraints: { format: email }
+      description: email address of azure account
+  azurePassword:
+    string:
+      constraints: { minLength: 1 }
+      description: password of azure account
+      isSecret: true
+  name:
+    string:
+      constraints: { minLength: 1 }
+      description: name of the secret
+  vaultName:
+    string:
+      constraints: { minLength: 1 }
+      description: name of the key vault
+  value:
+    string:
+      constraints: { minLength: 1 }
+      description: plain text secret value.
+  expires:
+    string:
+      constraints: { minLength: 1 }
+      description: expiration UTC datetime (Y-m-d'T'H:M:S'Z')
+      default: '2018-06-13'
+  description:
+    string:
+      constraints: { minLength: 1 }
+      description: description of the secret contents
+      default: keyvault secret
+  disabled:
+    string:
+      constraints: { enum: ['true', 'false'] }
+      description: create secret in disabled state
+      default: 'false'
+run:
+  container:
+    image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
+    cmd: [ /cmd.sh ]
+    files: { /cmd.sh }
+    envVars:
+      subscriptionId:
+      azureUsername:
+      azurePassword:
+      name:
+      vaultName:
+      value:
+      description:
+      disabled:
+      expires:
