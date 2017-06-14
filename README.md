@@ -1,5 +1,5 @@
 # problem statement
-creates an azure keyvault secret or sets existing secret with new value
+creates an azure keyvault secret or set existing secret value
 
 # example usage
 
@@ -25,14 +25,16 @@ run:
     pkg: { ref: github.com/opspec-pkgs/azure.keyvault.secret.set#VERSION }
     inputs:
       subscriptionId:
-      azureUsername:
-      azurePassword:
+      loginId:
+      loginSecret:
       name:
       vaultName:
       value:
       # begin optional args
+      loginTenantId:
+      loginType:
+      expires:
       description:
       disabled:
-      expires:
       # end optional args
 ```

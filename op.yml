@@ -1,19 +1,29 @@
 name: github.com/opspec-pkgs/azure.keyvault.secret.set
-description: creates an azure keyvault secret or sets existing secret with new value
+description: creates an azure keyvault secret or set existing secret value
 inputs:
   subscriptionId:
     string:
       constraints: { minLength: 1 }
       description: id of azure subscription
-  azureUsername:
-    string:
-      constraints: { format: email }
-      description: email address of azure account
-  azurePassword:
+  loginId:
     string:
       constraints: { minLength: 1 }
-      description: password of azure account
+      description: id of user, service principal, or app to login with
+  loginSecret:
+    string:
+      constraints: { minLength: 1 }
+      description: secret of user, service principal, or app to login with
       isSecret: true
+  loginTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id of user, service principal, or app to login with
+      default: " "
+  loginType:
+    string:
+      constraints: { enum: [user, sp]}
+      description: type of login; 'user' (default) or 'sp' for service principal
+      default: user
   name:
     string:
       constraints: { minLength: 1 }
@@ -25,7 +35,7 @@ inputs:
   value:
     string:
       constraints: { minLength: 1 }
-      description: plain text secret value.
+      description: plain text secret value
   expires:
     string:
       constraints: { minLength: 1 }
@@ -48,8 +58,10 @@ run:
     files: { /cmd.sh }
     envVars:
       subscriptionId:
-      azureUsername:
-      azurePassword:
+      loginId:
+      loginSecret:
+      loginTenantId:
+      loginType:
       name:
       vaultName:
       value:
