@@ -1,5 +1,5 @@
-name: github.com/opspec-pkgs/azure.keyvault.secret.set
-description: creates an azure keyvault secret or set existing secret value
+name: github.com/opspec-pkgs/azure.keyvault.secret-string.set
+description: sets a secret string in azure keyvault (if it's not already set)
 inputs:
   subscriptionId:
     string:
@@ -14,21 +14,11 @@ inputs:
       constraints: { minLength: 1 }
       description: secret of user, service principal, or app to login with
       isSecret: true
-  loginTenantId:
-    string:
-      constraints: { minLength: 1 }
-      description: tenant id of user, service principal, or app to login with
-      default: " "
-  loginType:
-    string:
-      constraints: { enum: [user, sp]}
-      description: type of login; 'user' (default) or 'sp' for service principal
-      default: user
   name:
     string:
       constraints: { minLength: 1 }
       description: name of the secret
-  vaultName:
+  vault:
     string:
       constraints: { minLength: 1 }
       description: name of the key vault
@@ -51,6 +41,16 @@ inputs:
       constraints: { enum: ['true', 'false'] }
       description: create secret in disabled state
       default: 'false'
+  loginTenantId:
+    string:
+      constraints: { minLength: 1 }
+      description: tenant id of user, service principal, or app to login with
+      default: ' '
+  loginType:
+    string:
+      constraints: { enum: [user, sp]}
+      description: type of login; 'user' (default) or 'sp' for service principal
+      default: user
 run:
   container:
     image: { ref: 'azuresdk/azure-cli-python:0.2.10' }
@@ -60,11 +60,11 @@ run:
       subscriptionId:
       loginId:
       loginSecret:
-      loginTenantId:
-      loginType:
       name:
-      vaultName:
       value:
+      vault:
       description:
       disabled:
       expires:
+      loginTenantId:
+      loginType:

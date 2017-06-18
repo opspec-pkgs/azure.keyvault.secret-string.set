@@ -19,37 +19,24 @@ case "$loginType" in
 esac
 eval "$loginCmd" >/dev/null
 
-echo "setting default subscription"
+echo 'setting default subscription'
 az account set --subscription "$subscriptionId"
 ### end login
 
-echo "checking for existing key vault secret"
-if [ "$(az keyvault secret show --name "$name" --vault-name "$vaultName")" != "" ]
+### Guard: only update if changed to avoid unnecessary versioning
+echo 'checking if secret exists'
+if [ "$(az keyvault secret show --query 'value' --output tsv --name "$name" --vault-name "$vault")" = "$value" ]
 then
-  echo "existing secret found"
-  
-  if [ "$(az keyvault secret show --output json --name "$name" --vault-name "$vaultName" | jq --raw-output '.value')" = "$value" ]
-  then
-    echo "existing secret contains same value"
-  else
-    echo "updating existing secret value"
-    az keyvault secret set \
-      --description "$description" \
-      --disabled "$disabled" \
-      --expires "$expires" \
-      --name "$name" \
-      --vault-name "$vaultName" \
-      --value "$value" \
-      >/dev/null
-    fi
-else
-  echo "creating new keyvault secret"
-  az keyvault secret set \
-    --description "$description" \
-    --disabled "$disabled" \
-    --expires "$expires" \
-    --name "$name" \
-    --vault-name "$vaultName" \
-    --value "$value" \
-    >/dev/null
+  echo 'secret exists'
+  exit
 fi
+
+echo 'setting secret'
+az keyvault secret set \
+--description "$description" \
+--disabled "$disabled" \
+--expires "$expires" \
+--vault-name "$vault" \
+--name "$name" \
+--value "$value" \
+>/dev/null

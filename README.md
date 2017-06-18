@@ -1,20 +1,20 @@
 # problem statement
-sets a string secret in azure keyvault (if it's not already set)
+sets a secret string in azure keyvault (if it's not already set)
 
 # example usage
 
-> note: in examples, VERSION represents a version of the azure.keyvault.secret.set pkg
+> note: in examples, VERSION represents a version of the azure.keyvault.secret-string.set pkg
 
 ## install
 
 ```shell
-opctl pkg install github.com/opspec-pkgs/azure.keyvault.secret.set#VERSION
+opctl pkg install github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION
 ```
 
 ## run
 
 ```
-opctl run github.com/opspec-pkgs/azure.keyvault.secret.set#VERSION
+opctl run github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION
 ```
 
 ## compose
@@ -22,19 +22,19 @@ opctl run github.com/opspec-pkgs/azure.keyvault.secret.set#VERSION
 ```yaml
 run:
   op:
-    pkg: { ref: github.com/opspec-pkgs/azure.keyvault.secret.set#VERSION }
+    pkg: { ref: github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION }
     inputs:
       subscriptionId:
       loginId:
       loginSecret:
       name:
-      vaultName:
       value:
-      # begin optional args
-      loginTenantId:
-      loginType:
-      expires:
+      vault:
+      # end optional args
       description:
       disabled:
+      expires:
+      loginTenantId:
+      loginType:
       # end optional args
 ```
