@@ -1,5 +1,5 @@
 # problem statement
-creates an azure keyvault secret or set existing secret value
+sets a string secret in azure keyvault (if it's not already set)
 
 # example usage
 
