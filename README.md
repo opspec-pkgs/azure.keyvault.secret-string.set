@@ -1,45 +1,47 @@
 [![Build Status](https://travis-ci.org/opspec-pkgs/azure.keyvault.secret-string.set.svg?branch=master)](https://travis-ci.org/opspec-pkgs/azure.keyvault.secret-string.set)
 
+<img src="icon.svg" alt="icon" height="100px">
+
 # Problem statement
 
 sets a secret string in azure keyvault (if it's not already set)
 
+# Format
+
+this version of the pkg is in [![opspec 0.1.5](https://img.shields.io/badge/opspec-0.1.5-brightgreen.svg?colorA=6b6b6b&colorB=fc16be)](https://opspec.io/0.1.5/packages.html) format
+
 # Example usage
 
-> note: in examples, VERSION represents a version of the
-> azure.keyvault.secret-string.set pkg
-
-## install
+## Install
 
 ```shell
-opctl pkg install github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION
+opctl pkg install github.com/opspec-pkgs/azure.keyvault.secret-string.set#
 ```
 
-## run
+## Run
 
 ```
-opctl run github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION
+opctl run github.com/opspec-pkgs/azure.keyvault.secret-string.set#
 ```
 
-## compose
+## Compose
 
 ```yaml
 op:
-  pkg: { ref: github.com/opspec-pkgs/azure.keyvault.secret-string.set#VERSION }
+  pkg: { ref: github.com/opspec-pkgs/azure.keyvault.secret-string.set# }
   inputs:
     subscriptionId:
     loginId:
     loginSecret:
     name:
-    value:
     vault:
-    # end optional args
+    value:
+    # params w/ default
+    expires:
     description:
     disabled:
-    expires:
     loginTenantId:
     loginType:
-    # end optional args
 ```
 
 # Support

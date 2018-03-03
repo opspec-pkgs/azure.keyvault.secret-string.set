@@ -1,2 +1,5 @@
-### Jetbrains
+# Jetbrains
 .idea/
+
+# opctl
+*args*.yml
